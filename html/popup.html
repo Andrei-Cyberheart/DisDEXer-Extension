@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>DisDEXer</title>
+</head>
+<body>
+<h1>DisDEXer</h1>
+<span type="time" id="last-time-display">01:00</span>
+
+<div class="times-field">
+    <label for="input-minutes">Break:</label>
+    <input autofocus type="number" id="input-minutes" min="0" max="59" step="1" value="1" required>
+    <input type="number" id="input-seconds" max="59" min="0" step="5" value="0">
+</div>
+<div class="btn-group" style="width:100%">
+    <button id="start-button" style="width:48%">START</button>
+    <button id="stop-button" style="width:48%">STOP</button>
+
+</div>
+<button id="log-button">LOGs</button>
+</body>
+</html>
