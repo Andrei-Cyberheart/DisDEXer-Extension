@@ -1,0 +1,28 @@
+{
+  "name": "DisDEXer",
+  "description": "Chrome Extension for a disconnecting dialer",
+  "version": "0.1",
+  "manifest_version": 3,
+  "icons": {
+    "64":"icons/disconnect64.png"
+  },
+  "action": {
+    "default_popup":"html/popup.html"
+  },
+  "content_scripts": [
+    {
+      "js": ["js/content.js"],
+      "matches": ["https://dex.survey-studio.com/*"]
+    }
+  ],
+  "permissions": [
+    "alarms",
+    "notifications",
+    "scripting",
+    "storage",
+    "tabs"
+  ],
+  "background": {
+    "service_worker": "js/background.js"
+  }
+}
