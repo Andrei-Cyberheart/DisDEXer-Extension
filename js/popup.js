@@ -14,6 +14,17 @@ chrome.storage.sync.get(["status", "disconnect", "currentTime"], (result) => {
     }
 });
 
+if (stopButton) {
+    stopButton.addEventListener("click", async (e) => {
+        console.log("Clicked Stop button")
+
+        chrome.storage.sync.set({"status": false, "disconnect": false, "breakTime": "01:00"})
+
+        chrome.alarms.clear("dis-dex")
+        statusTimer = false
+    });
+}
+
 if (logButton) {
     logButton.addEventListener("click", async (e) => {
         console.log("Clicked Log button")
