@@ -14,6 +14,28 @@ chrome.storage.sync.get(["status", "disconnect", "currentTime"], (result) => {
     }
 });
 
+if (startButton) {
+    startButton.addEventListener("click", async (e) => {
+        console.log("Clicked Start button")
+
+        var currentTime, breakTime;
+
+        chrome.storage.sync.set({"disconnect": false})
+        chrome.storage.sync.set({"status": true})
+
+        chrome.storage.sync.get("currentTime").then((result) => {
+            currentTime = convertStringToDateTime(result.currentTime)
+            breakTime = convertStringToDateTime(inputMinutes.value + ":" + inputSeconds.value)
+            let lastTime = new Date((breakTime.getTime() - currentTime.getTime()))
+            console.log(`CurrentTime: ${currentTime}`)
+            console.log(`BreakTime: ${breakTime}`)
+            console.log(`LastTime: ${lastTime}`)
+
+            Timer(lastTime)
+        });
+    });
+}
+
 if (stopButton) {
     stopButton.addEventListener("click", async (e) => {
         console.log("Clicked Stop button")
