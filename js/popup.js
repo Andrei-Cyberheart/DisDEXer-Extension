@@ -65,3 +65,10 @@ inputMinutes.addEventListener("change", (event) => {
     var seconds = String(lastTime.getSeconds())
     setTimeDisplay(minutes, seconds)
 });
+
+inputSeconds.addEventListener("change", (event) => {
+    let lastTime = convertStringToDateTime(timeDisplay.textContent)
+    var minutes = String(lastTime.getMinutes())
+    let seconds = event.target.value
+    setTimeDisplay(minutes, seconds)
+});
