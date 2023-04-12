@@ -58,3 +58,10 @@ if (logButton) {
         console.log(`statusTimer: ${statusTimer}`)
     });
 }
+
+inputMinutes.addEventListener("change", (event) => {
+    let lastTime = convertStringToDateTime(timeDisplay.textContent)
+    let minutes = event.target.value
+    var seconds = String(lastTime.getSeconds())
+    setTimeDisplay(minutes, seconds)
+});
