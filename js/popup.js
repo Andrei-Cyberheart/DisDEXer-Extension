@@ -83,3 +83,11 @@ function setTimeDisplay(minutes, seconds) {
     let setTime = `${minutes}:${seconds}`
     timeDisplay.textContent = setTime
 }
+
+function convertStringToDateTime(timeString) {
+    let date = new Date(0);
+    let [minutes, seconds] = String(timeString).split(":");
+    date.setMinutes(parseInt(minutes));
+    date.setSeconds(parseInt(seconds));
+    return date;
+}
