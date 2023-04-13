@@ -72,3 +72,14 @@ inputSeconds.addEventListener("change", (event) => {
     let seconds = event.target.value
     setTimeDisplay(minutes, seconds)
 });
+
+function setTimeDisplay(minutes, seconds) {
+    if (minutes < 10) {
+        minutes = "0" + minutes
+    }
+    if (seconds < 10) {
+        seconds = "0" + seconds
+    }
+    let setTime = `${minutes}:${seconds}`
+    timeDisplay.textContent = setTime
+}
