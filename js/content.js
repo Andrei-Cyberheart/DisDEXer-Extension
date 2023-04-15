@@ -12,3 +12,15 @@ var observer = new MutationObserver(function(mutations) {
 
 var config = {characterData: true, subtree: true};
 observer.observe(time, config)
+
+chrome.storage.onChanged.addListener( (changes, namespace) => {
+    //Press Disconnect button
+    if (changes.disconnect && changes.disconnect.newValue === true) {
+
+        //buttonConnect.click()
+        buttonDisconnect.click()
+
+        chrome.storage.sync.set({"disconnect": false})
+        chrome.storage.sync.set({"status": false})
+    }
+})
