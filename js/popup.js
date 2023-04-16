@@ -73,6 +73,36 @@ inputSeconds.addEventListener("change", (event) => {
     setTimeDisplay(minutes, seconds)
 });
 
+function Timer(lastTime) {
+
+    statusTimer = true
+    let finishTime = new Date()
+    finishTime.setMinutes(finishTime.getMinutes() + lastTime.getMinutes())
+    finishTime.setSeconds(finishTime.getSeconds() + lastTime.getSeconds())
+    var x = setInterval(function() {
+
+        var now = new Date();
+
+        var distance = finishTime.getTime() - now.getTime()
+
+        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        setTimeDisplay(minutes, seconds)
+
+        if (!statusTimer) {
+            clearInterval(x)
+        }
+
+        if (distance < 1000) {
+            clearInterval(x)
+            statusTimer = false
+            chrome.alarms.create("dis-dex", { delayInMinutes: 0 })
+            chrome.storage.sync.set({"disconnect": true})
+        }
+    }, 1000);
+}
+
 function setTimeDisplay(minutes, seconds) {
     if (minutes < 10) {
         minutes = "0" + minutes
