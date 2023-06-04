@@ -2,7 +2,13 @@ let time = document.querySelector(".text-sm-body-1 .text-caption");
 let buttonConnect = document.querySelector("#app > div.v-application--wrap > div.toolbar.toolbar > header > div > div:nth-child(3) > button");
 let buttonDisconnect = document.querySelector("#app > div.v-application--wrap > div.toolbar.toolbar > header > div > div:nth-child(4) > button");
 
-
+chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
+    if (request.message === "get_element_value") {
+        var element = document.querySelector(".text-sm-body-1 .text-caption");
+        var value = element ? element.innerText : "Элемент не найден";
+        sendResponse({ value: value });
+    }
+});
 
 chrome.storage.onChanged.addListener( (changes, namespace) => {
     //Press Disconnect button
