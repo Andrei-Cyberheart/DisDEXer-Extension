@@ -15,7 +15,7 @@ chrome.storage.sync.get(["status", "disconnect", "currentTime"], (result) => {
 });
 
 if (startButton) {
-    startButton.addEventListener("click", async (e) => {
+    startButton.addEventListener("click", function(){
         console.log("Clicked Start button")
 
         var currentTime, breakTime;
@@ -23,16 +23,18 @@ if (startButton) {
         chrome.storage.sync.set({"disconnect": false})
         chrome.storage.sync.set({"status": true})
 
-        chrome.storage.sync.get("currentTime").then((result) => {
-            currentTime = convertStringToDateTime(result.currentTime)
-            breakTime = convertStringToDateTime(inputMinutes.value + ":" + inputSeconds.value)
-            let lastTime = new Date((breakTime.getTime() - currentTime.getTime()))
-            console.log(`CurrentTime: ${currentTime}`)
-            console.log(`BreakTime: ${breakTime}`)
-            console.log(`LastTime: ${lastTime}`)
+        chrome.tabs.query({ active: true, currentWindow: true }, function(tabs) {
+            chrome.tabs.sendMessage(tabs[0].id, {message: "get_element_value"}, function (response) {
+                currentTime = convertStringToDateTime(response.value)
+                breakTime = convertStringToDateTime(inputMinutes.value + ":" + inputSeconds.value)
+                let lastTime = new Date((breakTime.getTime() - currentTime.getTime()))
+                console.log(`CurrentTime: ${currentTime}`)
+                console.log(`BreakTime: ${breakTime}`)
+                console.log(`LastTime: ${lastTime}`)
 
-            Timer(lastTime)
-        });
+                Timer(lastTime)
+            })
+        })
     });
 }
 
