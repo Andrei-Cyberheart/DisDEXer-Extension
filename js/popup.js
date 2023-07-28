@@ -49,18 +49,6 @@ if (stopButton) {
     });
 }
 
-if (logButton) {
-    logButton.addEventListener("click", async (e) => {
-        console.log("Clicked Log button")
-        chrome.storage.sync.get(null, function(items) {
-            let allKeys = Object.keys(items);
-            let allValues = Object.values(items)
-            console.log(items);
-        });
-        console.log(`statusTimer: ${statusTimer}`)
-    });
-}
-
 inputMinutes.addEventListener("change", (event) => {
     let lastTime = convertStringToDateTime(timeDisplay.textContent)
     let minutes = event.target.value
