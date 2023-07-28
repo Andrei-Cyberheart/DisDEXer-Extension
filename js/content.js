@@ -4,9 +4,7 @@ let buttonDisconnect = document.querySelector("#app > div.v-application--wrap > 
 
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
     if (request.message === "get_element_value") {
-        var element = document.querySelector(".text-md-body-1 .text-caption");
-        var value = element ? element.innerText : "Элемент не найден";
-        sendResponse({ value: value });
+        sendResponse({ value: time.innerText });
     }
 });
 
